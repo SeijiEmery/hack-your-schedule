@@ -19,6 +19,15 @@ module.exports = function(app, passport) {
             req.logout();
             res.redirect('/');
         });
+
+        // TODO:
+
+        // Add page routing to views/weekly.ejs, views/tasks.ejs, views/categories.ejs
+        // Weekly should be a weekly calendar that can show tasks arranged by recorded time blocks
+        // tasks should just list all tasks and have a search bar to filter them (or something)
+        // categories should list all categories w/ options to rename and delete them
+        //
+        // Also, all of the above should only be accessible when the user is logged in.
     
     // =============================================================================
     // AUTHENTICATE (FIRST LOGIN) ==================================================
