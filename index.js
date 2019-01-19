@@ -17,9 +17,37 @@ const perPage = process.env.PAGE_SIZE || 10;
 const mongoUrl = process.env.MONGODB_URI || 'mongodb://mlh-localhost:uSI0Ir6tQg5qtj4Ao485wmlrCFDHmkMTqcrkhLuD9mRHkfj6NIkdB9Q0iZf5xXDzkmeWamyfmf89DW2a1fGC4g==@mlh-localhost.documents.azure.com:10255/mlh-localhost?ssl=true&replicaSet=globaldb';
 const defaultPassword = process.env.HACKERLOG_PASSWORD || 'P@ssw0rd!';
 
-// Create post schema
-
-// TODO: replace this with our schema
+// Mongoose Schemas
+const ObjectId = mongoose.Schema.ObjectId;
+const TimeBlockSchema = mongoose.Schema({
+  id: ObjectId,
+  start: Date,
+  end:   Date,
+});
+const CategorySchema = mongoose.Schema({
+  id: ObjectId,
+  name: String,
+  color: String,
+});
+const TaskSchema = mongoose.Schema({
+  id: ObjectId,
+  descrip: String,
+  completed: Boolean,
+  timeblocks: [TimeBlockSchema],
+  nextScheduled: { type: Date, required: false },
+  categoryIds: [ObjectId],
+});
+const UserSchema = mongoose.Schema({
+  id: ObjectId,
+  username: String,
+  auth: String,     // TBD...
+  tasks: [TaskSchema],
+  tags: [CategorySchema],
+});
+const User = mongoose.model('User', UserSchema);
+const Task = mongoose.model('Task', TaskSchema);
+const Category = mongoose.model('Category', CategorySchema);
+const TimeBlock = mongoose.model('TimeBlock', TimeBlockSchema);
 
 const updateSchema = mongoose.Schema({
   name: { type: String, required: true },
