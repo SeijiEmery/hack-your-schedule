@@ -18,6 +18,9 @@ const mongoUrl = process.env.MONGODB_URI || 'mongodb://mlh-localhost:uSI0Ir6tQg5
 const defaultPassword = process.env.HACKERLOG_PASSWORD || 'P@ssw0rd!';
 
 // Create post schema
+
+// TODO: replace this with our schema
+
 const updateSchema = mongoose.Schema({
   name: { type: String, required: true },
   update: { type: String, required: true }
