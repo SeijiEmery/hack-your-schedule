@@ -1,1 +1,1 @@
-# cruzhacks-19
+CruzHack 2019
