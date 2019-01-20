@@ -1,8 +1,22 @@
 import React, { Component } from 'react';
+import { WingBlank, WhiteSpace, Button, Checkbox } from 'antd-mobile';
 
 class TaskItem extends Component {
+    constructor () {
+        super();
+        // this.setCompleted = this.setCompleted.bind(this);
+    }
+    setCompleted (value) {
+        // this.props.onTaskUpdated(this.props.task, { completed: value });
+    }
     render () {
-        return <p>This is a task, and its text is "{this.props.task.text}"</p>
+        const task = this.props.task;
+        return (
+            <div>
+                <span>{task.text}</span>
+                <Checkbox checked={task.complete} onChange={this.setCompleted} />
+            </div>
+        );
     }
 }
 export default TaskItem;
