@@ -10,6 +10,7 @@ class App extends Component {
     super();
     this.state = { tasks: [] };
     this.addTask = this.addTask.bind(this);
+    this.updateTask = this.updateTask.bind(this);
   }
   // Called by TaskItem when a new task item is added.
   // Task state is constructed and passed here as task
@@ -36,13 +37,33 @@ class App extends Component {
       tasks: state.tasks.concat([ task ])
     }))
   }
+  updateTask (taskIndex, update) {
+    if (taskIndex < 0 || taskIndex >= this.state.tasks.length) {
+      window.alert("INDEX OUT OF RANGE: "+taskIndex);
+      return;
+    }
+    let tasks = this.state.tasks;
+    // window.alert("Updating task: "+taskIndex+" "+JSON.stringify(update));
+    tasks[taskIndex] = Object.assign(tasks[taskIndex], update);
+    // window.alert("after: "+JSON.stringify(tasks[taskIndex]));
+
+    // filter to non-deleted tasks. Also has byproduct of copying to avoid mutation
+    // (though we are, uh, mutating above)
+    this.updateTasks(tasks.filter((task) => !task.isDeleted)); 
+  }
+  updateTasks (tasks) {
+    this.setState({ tasks: tasks });
+    // move socket I/O stuff here
+    socket.emit("update",{ tasks: tasks });
+  }
 
   render() {
     return (
       <div className="App">
         <TaskView 
           tasks={this.state.tasks}
-          onTaskAdded={this.addTask}  
+          onTaskAdded={this.addTask}
+          onTaskUpdated={this.updateTask}  
         />
 
         <header className="App-header">

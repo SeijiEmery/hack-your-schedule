@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Layout } from 'antd';
 import { Button, List, InputItem } from 'antd-mobile';
 import TaskItem from './TaskItem';
+import './tasks.css';
 
 // Self-contained task "view".
 // Contains internal layout, textbox w/ "Add task" button,
@@ -31,23 +32,29 @@ class TaskView extends Component {
     }
     render () {
         return (
-            <Layout>
-                <Layout.Header>
-                    <InputItem 
-                        value={this.state.taskDescrip} 
-                        onChange={this.setNewTaskText}
-                        onPressEnter={this.setNewTaskText}
-                    />
-                    <Button onClick={this.addTask}>Add Task</Button>
-                </Layout.Header>
-                {/* <Content> */}
-                    <List>
-                        {this.props.tasks.map((task) => {
-                            return <TaskItem task={task} />
-                        })} 
-                    </List>
-                {/* </Content> */}
-            </Layout>
+            <div className="task-container">
+                <Layout>
+                    <Layout.Header>
+                        <InputItem 
+                            value={this.state.taskDescrip} 
+                            onChange={this.setNewTaskText}
+                            onPressEnter={this.setNewTaskText}
+                        />
+                        <Button onClick={this.addTask}>Add Task</Button>
+                    </Layout.Header>
+                    {/* <Content> */}
+                        <List>
+                            {this.props.tasks.map((task, i) => {
+                                return <TaskItem 
+                                    task={task} 
+                                    index={i}
+                                    onUpdate={this.props.onTaskUpdated}    
+                                />
+                            })} 
+                        </List>
+                    {/* </Content> */}
+                </Layout>
+            </div>
         )
     }
 }
