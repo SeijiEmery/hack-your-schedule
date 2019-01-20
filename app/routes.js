@@ -27,7 +27,7 @@ module.exports = function(app, passport) {
         // tasks should just list all tasks and have a search bar to filter them (or something)
         // categories should list all categories w/ options to rename and delete them
         //
-        // Also, all of the above should only be accessible when the user is logged in.
+        // Also, all of the above should only be accessible when the user is logged in
     
     // =============================================================================
     // AUTHENTICATE (FIRST LOGIN) ==================================================
