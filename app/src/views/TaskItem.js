@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Progress, Button, Row, Col, Checkbox } from 'antd';
+import { getDuration, durationToString } from '../util/DurationToString';
 import './tasks.css';
 
 class TaskItem extends Component {
@@ -11,35 +12,52 @@ class TaskItem extends Component {
         this.toggleActive = this.toggleActive.bind(this);
     }
     deleteButtonClicked (event) {
-        this.props.onUpdate(this.props.index, { isDeleted: true });
+        if (this.state.active) {
+            this.toggleActive();
+        }
         if(event.nativeEvent) {
             event.nativeEvent.preventDefault();
             event.nativeEvent.stopPropagation();
           }
           event.preventDefault();
           event.stopPropagation();
+          this.props.onUpdate(this.props.index, { isDeleted: true });
     }
     checkboxToggled (event) {
+        if (this.state.active) {
+            this.toggleActive();
+        }
+
         let completed = this.props.task.completed;
-        this.props.onUpdate(this.props.index, { completed: !completed });
         if(event.nativeEvent) {
             event.nativeEvent.preventDefault();
             event.nativeEvent.stopPropagation();
           }
           event.preventDefault();
           event.stopPropagation();
+          this.props.onUpdate(this.props.index, { completed: !completed });
     }
     toggleActive () {
         let active = !this.state.active;
-        this.setState({ active: active });
+        this.setState({ active: active, startTime: active ? new Date() : null });
         if (active) {
             // Start timer...
+            this.interval = setInterval(() => {
+                this.setState({ 
+                    timeElapsed: this.props.task.timeElapsed + getDuration(this.state.startTime, new Date()) 
+                });
+            }, 1000);
         } else {
             // Stop timer...
+            clearInterval(this.interval);
+            this.props.onUpdate(this.props.index, { timeElapsed: this.state.timeElapsed });
         }
     }
     render () {
         const task = this.props.task;
+        let timeElapsed = this.state.active ?
+            this.state.timeElapsed :
+            task.timeElapsed;
         return (
             <div onClick={this.toggleActive} className={this.state.active ? "active-task" : "inactive-task"}>
                 <Row>
@@ -50,6 +68,7 @@ class TaskItem extends Component {
                     </Col>
                     <Col span={20}>
                         <p>Task: {task.text} id={this.props.index} isDeleted={!!task.isDeleted}</p>
+                        <p>{durationToString(timeElapsed)}</p>
                     </Col>
                     <Col span={2}>
                         <Button onClick={this.deleteButtonClicked}>Delete</Button>

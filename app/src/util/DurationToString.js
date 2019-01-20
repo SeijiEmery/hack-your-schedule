@@ -4,8 +4,10 @@ function getDateUTCMilliseconds (date) {
     return Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(),
         date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
 }
-function durationToString (fromDate, toDate) {
-    let durationInMilliseconds = getDateUTCMilliseconds(toDate) - getDateUTCMilliseconds(fromDate);
+function getDuration (fromDate, toDate) {
+    return getDateUTCMilliseconds(toDate) - getDateUTCMilliseconds(fromDate);
+}
+function durationToString (durationInMilliseconds) {
     let durationInSeconds = durationInMilliseconds * 1e-3;
 
     if (durationInSeconds < 60) {
@@ -18,4 +20,5 @@ function durationToString (fromDate, toDate) {
         return ""+((durationInSeconds / 3600).toFixed(1))+"d";
     }
 }
-export default durationToString;
+export { durationToString, getDuration, getDateUTCMilliseconds };
+
