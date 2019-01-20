@@ -23,7 +23,7 @@ io.on('connection', function(socket) {
     socket.on('update', function(data) {
         todos.pop();
         todos.push(data);
-        console.log("TODO: Update");
+        console.log(todos);
     });
 });
 
