@@ -26,4 +26,4 @@ socket.io
 react
 node.js
 html
-javascrip
+javascript
