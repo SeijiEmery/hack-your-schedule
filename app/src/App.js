@@ -16,6 +16,14 @@ class App extends Component {
       tasks: state.tasks.concat([ task ])
     }))
   }
+  updateTask (task) {
+
+  }
+  deleteTask (task) {
+    
+  }
+
+
   render() {
     return (
       <div className="App">
