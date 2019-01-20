@@ -25,6 +25,7 @@ class TaskView extends Component {
             tags: [],
         });
     }
+    
     setNewTaskText (text) {
         this.setState({ taskDescrip: text });
     }

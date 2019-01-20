@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import TaskView from './views/TaskView';
+import socketIOClient from "socket.io-client";
 
+const SOCKET_ENDPOINT = "http://localhost:8000";
 class App extends Component {
   constructor () {
     super();
@@ -11,11 +13,26 @@ class App extends Component {
   }
   // Called by TaskItem when a new task item is added.
   // Task state is constructed and passed here as task
+  componentDidMount(){
+    this.socket = socketIOClient(SOCKET_ENDPOINT);
+  }
   addTask (task) {
+    let socket = this.socket;
+    const demo = {
+            text: this.state.taskDescrip,
+            complete: false,
+            timeElapsed: 0.0,
+            tags: [],
+            timestamp:0.0//epoc 
+        };
+    if(socket){
+      socket.emit("add",demo);
+    }
     this.setState(state => ({
       tasks: state.tasks.concat([ task ])
     }))
   }
+
   render() {
     return (
       <div className="App">
