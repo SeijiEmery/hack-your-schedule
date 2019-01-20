@@ -1,5 +1,5 @@
 CruzHack 2019
-
+![image](https://challengepost-s3-challengepost.netdna-ssl.com/photos/production/software_photos/000/746/088/datas/gallery.jpg)
 Inspiration
 The inspiration we have for our project stems from our struggles in managing our time as we work on our assignments. In order to counter that, we decided to create something that will allow us to see our tasks throughout the day in order to track our tasks over time. Hence the Hack Your Schedule project was born.
 
