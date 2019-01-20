@@ -43,8 +43,12 @@ class TaskView extends Component {
                     </Layout.Header>
                     {/* <Content> */}
                         <List>
-                            {this.props.tasks.map((task) => {
-                                return <TaskItem task={task} />
+                            {this.props.tasks.map((task, i) => {
+                                return <TaskItem 
+                                    task={task} 
+                                    index={i}
+                                    onUpdate={this.props.onTaskUpdated}    
+                                />
                             })} 
                         </List>
                     {/* </Content> */}
