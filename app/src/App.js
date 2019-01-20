@@ -16,6 +16,25 @@ class App extends Component {
       tasks: state.tasks.concat([ task ])
     }))
   }
+  updateTask (task, update) {
+    if (task.taskId < 0 || task.taskId >= this.state.tasks.length)
+      return;
+
+    window.alert("updating task! "+JSON.stringify(task)+JSON.stringify(update));
+
+    // Make non-mutating copy of tasks
+    let tasks = this.state.tasks.slice(0);
+
+    // Update all changed fields
+    update.foreach((v, k) => {
+      tasks[task.id][k] = v;
+    });
+    // Update state
+    this.setState({ tasks: tasks });
+  }
+  deleteTask (task) {
+    // TBD... may need to switch tasks to dictionary...
+  }
   render() {
     return (
       <div className="App">
