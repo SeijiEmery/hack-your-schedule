@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import TaskView from './views/TaskView';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
+        <TaskView tasks={[ 1, 2, 3, 4, 5 ]} />
+
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>
