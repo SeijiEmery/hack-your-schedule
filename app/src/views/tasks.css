@@ -4,3 +4,11 @@
 .task-container {
   width: 300pt
 }
+
+.active-task {
+  background-color: greenyellow;
+  padding: 5px;
+}
+.inactive-task {
+  padding: 5px;
+}

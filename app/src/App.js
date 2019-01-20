@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import TaskView from './views/TaskView';
+import { Layout, Row, Col } from 'antd';
 
 class App extends Component {
   constructor () {
@@ -35,29 +36,48 @@ class App extends Component {
     this.setState({ tasks: tasks });
     // move socket I/O stuff here
   }
-  render() {
+  renderContent () {
     return (
-      <div className="App">
+      <Row>
+        <Col span={6} />
         <TaskView 
           tasks={this.state.tasks}
           onTaskAdded={this.addTask}
           onTaskUpdated={this.updateTask}  
         />
+        <Col span={6} />
+      </Row>
+    );
+  }
+  renderHeader () {
+    return (
+      <Row>
+        <h1>Header...</h1>
+      </Row>
+    );
+  }
+  renderFooter () {
+    return (
+      <Row>
+        <h2>Footer...</h2>
+      </Row>
+    );
+  }
 
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+  render() {
+    return (
+      <div className="App">
+        <Layout>
+          <Layout.Header>
+            {this.renderHeader()}
+          </Layout.Header>
+          <Layout.Content>
+            {this.renderContent()}
+          </Layout.Content>
+          <Layout.Footer>
+            {this.renderFooter()}
+          </Layout.Footer>
+        </Layout>
       </div>
     );
   }
