@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Progress, Button, Row, Col, Checkbox } from 'antd';
-import { getDuration, durationToString } from '../util/DurationToString';
+import { durationToString } from '../util/DurationToString';
 import './tasks.css';
 
 class TaskItem extends Component {
@@ -39,12 +39,13 @@ class TaskItem extends Component {
     }
     toggleActive () {
         let active = !this.state.active;
-        this.setState({ active: active, startTime: active ? new Date() : null });
+        this.setState({ active: active, startTime: active ? Date.now() : null });
         if (active) {
             // Start timer...
             this.interval = setInterval(() => {
                 this.setState({ 
-                    timeElapsed: this.props.task.timeElapsed + getDuration(this.state.startTime, new Date()) 
+                    timeElapsed: this.props.task.timeElapsed + 
+                        (Date.now() - this.state.startTime) 
                 });
             }, 1000);
         } else {
