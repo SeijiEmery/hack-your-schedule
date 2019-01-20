@@ -45,16 +45,18 @@ class App extends Component {
     let tasks = this.state.tasks;
     // window.alert("Updating task: "+taskIndex+" "+JSON.stringify(update));
     tasks[taskIndex] = Object.assign(tasks[taskIndex], update);
-    // window.alert("after: "+JSON.stringify(tasks[taskIndex]));
+    window.alert("after: "+JSON.stringify(tasks[taskIndex]));
 
     // filter to non-deleted tasks. Also has byproduct of copying to avoid mutation
     // (though we are, uh, mutating above)
-    this.updateTasks(tasks.filter((task) => !task.isDeleted)); 
+    this.updateTasks(tasks); 
   }
   updateTasks (tasks) {
-    this.setState({ tasks: tasks });
+    
+    this.setState({ tasks: tasks.filter((task) => !task.isDeleted) });
     // move socket I/O stuff here
-    socket.emit("update",{ tasks: tasks });
+    this.socket.emit("update",tasks);
+
   }
 
   render() {
