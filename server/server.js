@@ -1,6 +1,9 @@
-/*
+/*server.js
+hack your schedule server program
+github.com/wisehackermonkey
 by wise monkey
 20190120
+oranbusiness@gmail.com
 */
 
 const mongoose = require('mongoose');
