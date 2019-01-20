@@ -15,16 +15,20 @@ class App extends Component {
   // Task state is constructed and passed here as task
   componentDidMount(){
     this.socket = socketIOClient(SOCKET_ENDPOINT);
+    this.socket.on('sync', (data) => {
+      this.setState({tasks: data.tasks});
+    })
   }
   addTask (task) {
     let socket = this.socket;
     const demo = {
-            text: this.state.taskDescrip,
+            text: task.text,
             complete: false,
             timeElapsed: 0.0,
             tags: [],
             timestamp:0.0//epoc 
         };
+    console.log(demo);
     if(socket){
       socket.emit("add",demo);
     }

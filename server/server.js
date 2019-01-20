@@ -4,27 +4,33 @@ var io = require('socket.io')(http);
 
 var todos = [];
 
+var increment = 0;
 app.get('/', function(req, res) {
    res.sendfile('index.html');
 });
 
 io.on('connection', function(socket) {
+    socket.emit("sync",{"tasks":todos});
     socket.on('add', function(data) {
-        //Merge create
-        todos.push(data);
-        console.log(todos);
-    });
+    console.log(data);
+    todos.push(data);   
+});
 
-    socket.on('delete', function(data) {
-        todos.pop();
-        console.log(todos);
-    });
+// todo
+    // socket.on('delete', function(data) {
+    //     try{
+    //     delete todos[data.key];
+    //     }catch(e){
+    //         console.log("Error no key");
+    //     }
+    //         console.log(todos);
+    // });
 
-    socket.on('update', function(data) {
-        todos.pop();
-        todos.push(data);
-        console.log("TODO: Update");
-    });
+    // socket.on('update', function(data) {
+    //     todos.pop();
+    //     todos.push(data);
+    //     console.log("TODO: Update");
+    // });
 });
 
 http.listen(8000, function() {
