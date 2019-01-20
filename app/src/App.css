@@ -20,9 +20,11 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  
 }
-
+.ant-row > h1 {
+  color: rgba(72, 255, 0, 0.85);
+}
 .App-link {
   color: #61dafb;
 }

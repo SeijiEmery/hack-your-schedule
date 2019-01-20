@@ -68,7 +68,7 @@ class TaskItem extends Component {
                             onChange={this.checkboxToggled} />
                     </Col>
                     <Col span={20}>
-                        <p>Task: {task.text} id={this.props.index} isDeleted={!!task.isDeleted}</p>
+                        <p>Task: {task.text}</p>
                         <p>{durationToString(timeElapsed)}</p>
                     </Col>
                     <Col span={2}>

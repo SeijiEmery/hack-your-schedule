@@ -46,7 +46,7 @@ class App extends Component {
     let tasks = this.state.tasks;
     // window.alert("Updating task: "+taskIndex+" "+JSON.stringify(update));
     tasks[taskIndex] = Object.assign(tasks[taskIndex], update);
-    window.alert("after: "+JSON.stringify(tasks[taskIndex]));
+    // window.alert("after: "+JSON.stringify(tasks[taskIndex]));
 
     // filter to non-deleted tasks. Also has byproduct of copying to avoid mutation
     // (though we are, uh, mutating above)
@@ -76,14 +76,14 @@ class App extends Component {
   renderHeader () {
     return (
       <Row>
-        <h1>Header...</h1>
+        <h1>Hack Your Schedule</h1>
       </Row>
     );
   }
   renderFooter () {
     return (
       <Row>
-        <h2>Footer...</h2>
+        <h2></h2>
       </Row>
     );
   }
