@@ -13,7 +13,7 @@ const io = require('socket.io')(http);
 
 
 //setup database connection locally
-mongoose.connect('mongodb://localhost/tasks',{ useNewUrlParser: true });
+mongoose.connect('mongodb://localhost:27017/tasks',{ useNewUrlParser: true });
 var db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'connection error:'));
